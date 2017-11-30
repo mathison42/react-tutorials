@@ -87,7 +87,7 @@ class Game extends React.Component {
 
     const moves = history.map((step, move) => {
       const desc = move ?
-        'Go to move #' + move :
+        'Go to move #' + move + ' ' + getColRow(history, move):
         'Go to game start';
       return (
         <li key={move}>
@@ -117,6 +117,30 @@ class Game extends React.Component {
       </div>
     );
   }
+}
+
+function getColRow(history, step) {
+      const resultList = [
+        "(1, 1)",
+        "(2, 1)",
+        "(3, 1)",
+        "(1, 2)",
+        "(2, 2)",
+        "(3, 2)",
+        "(1, 3)",
+        "(2, 3)",
+        "(3, 3)",
+      ];
+    const current = history[step].squares
+    const last    = history[step-1].squares
+    let result = ""
+    for (let i = 0; i < current.length; i++) {
+        if (current[i] !== last[i]) {
+            result = resultList[i]
+            break
+        }
+    }
+    return result
 }
 
 function calculateWinner(squares) {
