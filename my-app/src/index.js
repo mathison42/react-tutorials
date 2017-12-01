@@ -89,11 +89,20 @@ class Game extends React.Component {
       const desc = move ?
         'Go to move #' + move + ' ' + getColRow(history, move):
         'Go to game start';
-      return (
+
+      let lineItem = (
         <li key={move}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
       );
+      if (this.state.stepNumber === move) {
+          lineItem = (
+            <li key={move}>
+              <button onClick={() => this.jumpTo(move)}><b>{desc}</b></button>
+            </li>
+          );
+      }
+      return lineItem;
     });
 
     let status;
@@ -119,7 +128,7 @@ class Game extends React.Component {
   }
 }
 
-function getColRow(history, step) {
+function getColRow(history, move) {
       const resultList = [
         "(1, 1)",
         "(2, 1)",
@@ -131,8 +140,8 @@ function getColRow(history, step) {
         "(2, 3)",
         "(3, 3)",
       ];
-    const current = history[step].squares
-    const last    = history[step-1].squares
+    const current = history[move].squares
+    const last    = history[move-1].squares
     let result = ""
     for (let i = 0; i < current.length; i++) {
         if (current[i] !== last[i]) {
