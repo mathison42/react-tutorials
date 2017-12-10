@@ -54,6 +54,7 @@ class Game extends React.Component {
       stepNumber: 0,
       xIsNext: true,
     };
+    this.sort=0;
   }
 
     handleClick(i) {
@@ -80,11 +81,16 @@ class Game extends React.Component {
     });
   }
 
+  sortList(i) {
+      this.sort = i;
+      this.setState(this.state) // Re-render page to show new sort
+  }
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winningSquares = calculateWinner(current.squares); //Grab winning squares
     const winner = winningSquares ? current.squares[winningSquares[0]] : null; // If winning squares, who is winner
+    const disableBtn = this.sort === 0 ? true : false
 
     const moves = history.map((step, move) => {
       let desc = move ?
@@ -119,7 +125,11 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <ol>{moves.sort(() => {return this.sort})}</ol>
+        </div>
+        <div>
+          <button className="game-sort-ascending"  disabled={disableBtn} onClick={() => this.sortList(0)}>Sort Ascending</button>
+          <button className="game-sort-descending" disabled={!disableBtn} onClick={() => this.sortList(1)}>Sort Descending</button>
         </div>
       </div>
     );
