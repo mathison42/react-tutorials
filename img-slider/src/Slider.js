@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import SlideOne from './SlideOne';
-import SlideTwo from './SlideTwo';
-import SlideThree from './SlideThree';
+import Slide from './Slide';
 import LeftArrow from './LeftArrow';
 import RightArrow from './RightArrow';
 
@@ -38,10 +36,7 @@ export default class Slider extends Component {
     return (
       <div className="slider">
           {/* Slides go here */}
-          { this.state.slideCount === 0 ? <SlideOne /> : null }
-          { this.state.slideCount === 1 ? <SlideTwo /> : null }
-          { this.state.slideCount === 2 ? <SlideThree /> : null }
-
+          { <Slide num= { this.state.slideCount } /> }
 
           {/* Arrow Functionality */}
           <div>
