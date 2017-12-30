@@ -12,3 +12,4 @@
 - [x] Combine into a single Slide component
 
 ### [React Native Application Getting Started (AwesomeProject)] (https://facebook.github.io/react-native/docs/getting-started.html) and [Tutorial](https://facebook.github.io/react-native/docs/tutorial.html)
+- [x] Tutorial Completed
